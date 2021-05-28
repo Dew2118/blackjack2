@@ -1,5 +1,7 @@
-import pytest
-from src.shoe import Shoe
+from blackjack2.src.shoe import Shoe
 
-def test_create_shoe():
-    assert Shoe() is not None
+def test_parameter():
+    assert Shoe(4) is not None
+
+def test_Shoe_init():
+    assert len(Shoe(1).cards) == 52
