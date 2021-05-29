@@ -1,8 +1,11 @@
 from blackjack2.src.shoe import Shoe
 from blackjack2.src.hand import Hand
-from blackjack2.src.curses_display import Display
 from blackjack2.src.strategist import Strategist
-
+import sys
+if not "pytest" in sys.modules:
+    from blackjack2.src.curses_display import display
+else:
+    display = None
 # Constant values
 NO_OF_DECKS = 1
 
@@ -10,10 +13,16 @@ class Game:
     def __init__(self):
         self.shoe = None
         self.hand_stack = []
+        self.split_counter = 1
         self.current_hand = None
         self.all_hand = self.hand_stack.copy()
-        self.display = Display(self)
         self.strategist = Strategist(self)
+
+    def display(self):
+        display.display(self)
+
+    def get_input(self):
+        return display.get_input()
 
     def setup_deck(self):
         self.shoe = Shoe(NO_OF_DECKS)
@@ -50,7 +59,7 @@ class Game:
         for count, hand in enumerate(self.all_hand):
             if hand.name != 'dealer':
                 # print(self.decide(hand, self.all_hand[0]))
-                self.display.display_decide(hand.name, self.decide(hand, self.all_hand[0]), count - 1)
+                display.display_decide(hand.name, self.decide(hand, self.all_hand[0]), count - 1)
     
     def decide(self, hand, other_hand):
         """return name of winner or tie if scores are equal"""

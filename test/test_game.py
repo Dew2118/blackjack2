@@ -1,7 +1,9 @@
 from blackjack2.src.game import Game
+from blackjack2.src import game
 from blackjack2.src.hand import Hand
 from blackjack2.src.card import Card
 
+game._called_from_test = True
 def test_game_init():
     assert Game() is not None
 

@@ -6,4 +6,4 @@ class Strategist:
         return input('Your decision is: ')
     
     def get_curses_decision(self):
-        return self.game.display.get_input()
+        return self.game.get_input()

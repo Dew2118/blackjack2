@@ -26,7 +26,7 @@ class Hand:
 
     def play(self, game):
         while not self.is_blackjack() and not self.is_busted():
-            game.display.display()
+            game.display()
             # decision = game.strategist.get_decision()
             decision = game.strategist.get_curses_decision()
             if decision == 'h':
@@ -38,7 +38,8 @@ class Hand:
                 break
             elif decision == 'sp':
                 self.split(game)
-        game.display.display()
+                game.display()
+        game.display()
 
 
     def is_splittable(self):
@@ -48,7 +49,8 @@ class Hand:
         if self.is_splittable() is False:
             return
         First_card, Second_card = self.cards.copy()
-        new_hand = Hand('split_1')
+        new_hand = Hand(f'split_{game.split_counter}')
+        game.split_counter += 1
         new_hand.cards = [Second_card]
         self.cards = [First_card]
         game.hand_stack.append(new_hand)
