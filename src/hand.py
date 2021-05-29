@@ -27,7 +27,8 @@ class Hand:
     def play(self, game):
         while not self.is_blackjack() and not self.is_busted():
             game.display.display()
-            decision = game.strategist.get_decision()
+            # decision = game.strategist.get_decision()
+            decision = game.strategist.get_curses_decision()
             if decision == 'h':
                 self.draw(game.shoe, 1)
             elif decision == 's':
