@@ -1,4 +1,8 @@
 class Display:
+    """Display game using normal print."""
+    # TODO: make class interface consistent between Display and Curses_display
+    # __init__ should not take game as parameter
+    # but game object will be passed when call display method.
     def __init__(self, game) -> None:
         self.game = game
 

@@ -1,3 +1,4 @@
 from blackjack2.src.game import Game
 
-Game().play()
+if __name__=='__main__':
+    Game().play()
