@@ -6,8 +6,6 @@ class Hand:
         for _ in range(num_of_card):
             self.cards.append(shoe.deal())
 
-    # def play(self):
-        # while not self.is_blackjack() and not self.is_busted():
 
     def is_busted(self):
         return (self.get_score() > 21)
@@ -24,6 +22,24 @@ class Hand:
     def is_blackjack(self):
         value = [c.value for c in self.cards]
         return (sorted(value) == [10,11])
+
+    def play(self, game):
+        while not self.is_blackjack() and not self.is_busted():
+            decision = self.game.strategy.get_decision()
+            if decision == 'h':
+                self.draw(1)
+            elif decision == 's':
+                break
+            elif decision == 'd':
+                self.draw(1)
+                break
+            elif decision == 'sp':
+                self.split()
+
+    def split(self):
+        pass
+
+    
 
     
 

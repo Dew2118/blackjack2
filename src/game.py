@@ -1,5 +1,6 @@
 from blackjack2.src.shoe import Shoe
 from blackjack2.src.player import Player
+# from blackjack2.src.strategist import Strategist
 
 # Constant values
 NO_OF_DECKS = 1
@@ -9,6 +10,7 @@ class Game:
         self.shoe = None
         self.hand_stack = []
         self.current_hand = None
+        # self.strategist = Strategist()
 
     def setup_deck(self):
         self.shoe = Shoe(NO_OF_DECKS)
@@ -18,12 +20,12 @@ class Game:
         #create dealer
         dealer = Player('dealer', is_dealer = True)
         dealers_hand = dealer.create_hand()
-        dealers_hand.draw(2)
+        dealers_hand.draw(self.shoe, 2)
         self.add_hand(dealers_hand)
         #create player
         player = Player('player')
         players_hand = player.create_hand()
-        players_hand.draw(2)
+        players_hand.draw(self.shoe, 2)
         self.add_hand(players_hand)
 
     def setup_hand(self, hand):
@@ -41,9 +43,9 @@ class Game:
     def play(self):
         self.setup_deck()
         self.setup_players()
-        self.current_hand = self.next_hand()
         while self.hand_left():
-            hand = self.next_hand()
+            self.current_hand = self.next_hand()
+
 
 
 
