@@ -17,6 +17,7 @@ class Game:
         self.current_hand = None
         self.all_hand = self.hand_stack.copy()
         self.strategist = Strategist(self)
+        self.running_count = 0
 
     def display(self):
         display.display(self)
@@ -31,10 +32,10 @@ class Game:
     def setup_players(self):
         #create dealer
         dealers_hand = Hand('dealer')
-        dealers_hand.draw(self.shoe, 2)
+        dealers_hand.draw(self, 2)
         self.add_hand(dealers_hand)
         players_hand = Hand('player')
-        players_hand.draw(self.shoe, 2)
+        players_hand.draw(self, 2)
         self.add_hand(players_hand)
         self.all_hand = self.hand_stack.copy()
 
@@ -69,9 +70,9 @@ class Game:
         if (hand.is_blackjack() is False) and (other_hand.is_blackjack() is True):
             return f'{other_hand.name} won'
         # check busted cases
-        if (hand.is_busted() is True) and (hand.is_busted() is False):
+        if (hand.is_busted() is True) and (other_hand.is_busted() is False):
             return f'{hand.name} won'
-        if (hand.is_busted() is False) and (hand.is_busted() is True):
+        if (hand.is_busted() is False) and (other_hand.is_busted() is True):
             return f'{other_hand.name} won'
         # check score cases
         if hand.get_score() > other_hand.get_score():
@@ -80,15 +81,3 @@ class Game:
             return f'{other_hand.name} won'
         else:
             return 'Tie'
-
-
-
-
-
-        
-        
-
-
-
-        
-

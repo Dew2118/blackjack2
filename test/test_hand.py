@@ -1,5 +1,5 @@
 from blackjack2.src.hand import Hand
-from blackjack2.src.shoe import Shoe
+from blackjack2.src.game import Game
 from blackjack2.src.card import Card
 
 def test_hand_init():
@@ -7,9 +7,11 @@ def test_hand_init():
 
 def test_draw():
     hand = Hand('player')
-    hand.draw(Shoe(1), 1)
+    game = Game()
+    game.setup_deck()
+    hand.draw(game, 1)
     assert len(hand.cards) == 1
-    hand.draw(Shoe(1), 2)
+    hand.draw(game, 2)
     assert len(hand.cards) == 3
 
 def test_get_score():

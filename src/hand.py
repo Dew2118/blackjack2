@@ -3,9 +3,15 @@ class Hand:
         self.cards = []
         self.name = name
 
-    def draw(self, shoe, num_of_card):
+    def draw(self, game, num_of_card):
         for _ in range(num_of_card):
-            self.cards.append(shoe.deal())
+            c = game.shoe.deal()
+            if c.score <= 6:
+                game.running_count += 1
+            if c.score >= 10:
+                game.running_count += -1
+            self.cards.append(c)
+
 
 
     def is_busted(self):
@@ -21,20 +27,28 @@ class Hand:
         return score
 
     def is_blackjack(self):
-        value = [c.value for c in self.cards]
-        return (sorted(value) == [10,11])
+        score = [c.score for c in self.cards]
+        return (sorted(score) == [10,11]) and (len(self.cards == 2))
 
     def play(self, game):
         while not self.is_blackjack() and not self.is_busted():
             game.display()
+            ace = False
+            for card in self.cards:
+                if card.score == 11:
+                    ace = True
             # decision = game.strategist.get_decision()
-            decision = game.strategist.get_curses_decision()
+            # decision = game.strategist.get_curses_decision()
+            if self.name != 'dealer':
+                decision = game.strategist.basic_strategy(self.get_score(), game.all_hand[0].cards[0].score, ace, self.is_splittable())
+            else:
+                decision = game.strategist.get_curses_decision()
             if decision == 'h':
-                self.draw(game.shoe, 1)
+                self.draw(game, 1)
             elif decision == 's':
                 break
             elif decision == 'd':
-                self.draw(game.shoe, 1)
+                self.draw(game, 1)
                 break
             elif decision == 'sp':
                 self.split(game)

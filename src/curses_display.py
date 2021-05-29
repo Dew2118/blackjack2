@@ -13,6 +13,7 @@ class Display:
         self.display_arrow()
         self.display_busted()
         self.display_blackjack()
+        self.stdscr.addstr(40, 0, f'The running count is {game.running_count} and the True count is {"%.2f" % round(game.running_count / len(game.shoe.cards), 2)}')
         for hand in self.game.all_hand:
             self.display_name(hand)
             y = self.y_dict[hand.name]
