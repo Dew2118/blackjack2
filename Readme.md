@@ -68,3 +68,6 @@ class Game
 PYTHONPATH=. pytest
 ```
 > เราต้องกำหนด PYTHONPATH ให้เป็น current directory เพื่อให้สามารถ import ได้
+
+30 May 2021
+ลืม update Readme ตอนนี้ เขียน code เสร็จแล้ว ขณะนี้ ทำ code reveiw เพื่อทบทวนและเรียนรู้ code ที่เขียนไป

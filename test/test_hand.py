@@ -22,6 +22,8 @@ def test_get_score():
     assert hand.get_score() == 21
     hand.cards = [Card('10','S'), Card('10','S'), Card('A','C')]
     assert hand.get_score() == 21
+    # TODO: add more test condisions when we have multiple ACE cards
+    # and see whether the code correctly adjusts the score. 
 
 def test_is_busted():
     hand = Hand('player')
