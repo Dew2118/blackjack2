@@ -1,6 +1,7 @@
 class Hand:
-    def __init__(self) -> None:
+    def __init__(self, name) -> None:
         self.cards = []
+        self.name = name
 
     def draw(self, shoe, num_of_card):
         for _ in range(num_of_card):
@@ -25,22 +26,29 @@ class Hand:
 
     def play(self, game):
         while not self.is_blackjack() and not self.is_busted():
-            decision = self.game.strategy.get_decision()
+            game.display.display()
+            decision = game.strategist.get_decision()
             if decision == 'h':
-                self.draw(1)
+                self.draw(game.shoe, 1)
             elif decision == 's':
                 break
             elif decision == 'd':
-                self.draw(1)
+                self.draw(game.shoe, 1)
                 break
             elif decision == 'sp':
-                self.split()
-
-    def split(self):
-        pass
-
-    
-
-    
+                self.split(game)
+        game.display.display()
 
 
+    def is_splittable(self):
+        return (len(self.cards) == 2) and (self.cards[0].value == self.cards[1].value)
+
+    def split(self, game):
+        if self.is_splittable() is False:
+            return
+        First_card, Second_card = self.cards.copy()
+        new_hand = Hand('split_1')
+        new_hand.cards = [Second_card]
+        self.cards = [First_card]
+        game.hand_stack.append(new_hand)
+        game.all_hand.append(new_hand)

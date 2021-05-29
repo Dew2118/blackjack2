@@ -5,7 +5,7 @@ class Player:
         self.name = player_name
         self.hands = []
 
-    def create_hand(self):
-        hand = Hand()
+    def create_hand(self, name = None):
+        hand = Hand(self.name)
         self.hands.append(hand)
         return hand
