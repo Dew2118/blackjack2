@@ -59,7 +59,6 @@ class Game:
             self.current_hand.play(self)
         for count, hand in enumerate(self.all_hand):
             if hand.name != 'dealer':
-                # print(self.decide(hand, self.all_hand[0]))
                 display.display_decide(hand.name, self.decide(hand, self.all_hand[0]), count - 1)
     
     def decide(self, hand, other_hand):

@@ -6,12 +6,14 @@ class Deck:
         value = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
         suit = ['S','H','D','C']
         self.cards = [Card(v,s) for v in value for s in suit]
+        self.drawn = []
 
     def deal(self):
         """return a Card. Raise RuntimeError if there is no card left."""
         if self.cards == []:
             raise RuntimeError
         result = self.cards.pop(0)
+        self.drawn.append(result)
         return result
         
     def shuffle(self):

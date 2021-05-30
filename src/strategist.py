@@ -8,6 +8,16 @@ class Strategist:
     def get_curses_decision(self):
         return self.game.get_input()
 
+    def make_decision(self, game):
+        if game.current_hand.name != 'dealer':
+            ace = False
+            for card in game.current_hand.cards:
+                if card.score == 11:
+                    ace = True
+            return self.basic_strategy(game.current_hand.get_score(), game.all_hand[0].cards[0].score, ace, game.current_hand.is_splittable())
+        else:
+            return self.get_curses_decision()
+
     def basic_strategy(self, sum, dealer_up_card, ace = False, splittable = False):
         if splittable == True:
             return self.split(sum, dealer_up_card, ace)
@@ -16,7 +26,7 @@ class Strategist:
         return self.norm(sum, dealer_up_card)
 
     def norm(self, sum, dealer_up_card):
-        if sum in [17,18,19,20,21]:
+        if sum >= 17:
             return 's'
         if sum in [13, 14, 15, 16]:
             if dealer_up_card in [2,3,4,5,6]:

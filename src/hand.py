@@ -23,15 +23,26 @@ class Hand:
     def draw(self, game, no_of_cards):
         """draw cards as many as specified in no_of_cards from shoe"""
         for _ in range(no_of_cards):
-            # TODO: make shoe keep track of drawn card
+            # DONE: make shoe keep track of drawn card
             # So if needed, we can go through the list of drawn card
             # and calculate running_count if we want
             c = game.shoe.deal()
-            if c.score <= 6:
-                game.running_count += 1
-            if c.score >= 10:
-                game.running_count += -1
             self.cards.append(c)
+
+    def update_running_count(self, game):
+        result = 0
+        drawn = game.shoe.drawn
+        for c in drawn:
+            if c.score <= 6:
+                result += 1
+            if c.score >= 10:
+                result += -1
+        if game.current_hand.name != 'dealer':
+            if game.all_hand[0].cards[1].score <= 6:
+                result -= 1
+            elif game.all_hand[0].cards[1].score >= 10:
+                result += 1
+        game.running_count = result
 
     def is_busted(self):
         return (self.get_score() > 21)
@@ -46,21 +57,22 @@ class Hand:
         return score
 
     def is_blackjack(self):
-        score = [c.score for c in self.cards]
-        # TODO: test whether if we change condition to check score = 21
+        # Done: test whether if we change condition to check score = 21
         # It is still correct.
-        return (sorted(score) == [10,11]) and (len(self.cards == 2))
+        return (self.get_score() == 21) and (len(self.cards) == 2)
 
     # Papa's version to consider
-    def play1(self, game):
+    def play(self, game):
         # If this hand is already blackjack, do nothing
         if self.is_blackjack():
             return
 
         stop_drawing = False
-        while not stop_drawing:
+        while not stop_drawing and not self.is_busted():
+            # update display
+            self.update_running_count(game)
+            game.display()
             decision = game.strategist.make_decision(game)
-
             if decision == 'h': # hit a card
                 self.draw(game, 1)
             elif decision == 's': # stand
@@ -74,39 +86,6 @@ class Hand:
             else:
                 # TODO: Display that it is unknown decision
                 pass
-            # update display
-            game.display()
-
-    def play(self, game):
-        while not self.is_blackjack() and not self.is_busted():
-            game.display()
-            ace = False
-            for card in self.cards:
-                if card.score == 11:
-                    ace = True
-            # decision = game.strategist.get_decision()
-            # decision = game.strategist.get_curses_decision()
-
-            # TODO: 1. can we make the calling to strategist the same way (same parameter list)
-            # 2. can we move the decision whether receiving manual input or autocalculate into strategist
-            if self.name != 'dealer':
-                decision = game.strategist.basic_strategy(self.get_score(), game.all_hand[0].cards[0].score, ace, self.is_splittable())
-            else:
-                decision = game.strategist.get_curses_decision()
-
-            if decision == 'h': # hit a card
-                self.draw(game, 1)
-            elif decision == 's': # stand
-                break
-            elif decision == 'd': # double the bet and draw 1 card
-            # TODO: need to add double the bet and make test to make sure that it's correct
-                self.draw(game, 1)
-                break
-            elif decision == 'sp': # split
-                self.split(game)
-                game.display()
-        game.display()
-
 
     def is_splittable(self):
         return (len(self.cards) == 2) and (self.cards[0].value == self.cards[1].value)

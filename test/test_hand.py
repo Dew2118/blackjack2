@@ -22,6 +22,10 @@ def test_get_score():
     assert hand.get_score() == 21
     hand.cards = [Card('10','S'), Card('10','S'), Card('A','C')]
     assert hand.get_score() == 21
+    hand.cards = [Card('10','S'), Card('A','S'), Card('A','C')]
+    assert hand.get_score() == 12
+    hand.cards = [Card('A','S'), Card('A','C')]
+    assert hand.get_score() == 12
     # TODO: add more test condisions when we have multiple ACE cards
     # and see whether the code correctly adjusts the score. 
 
