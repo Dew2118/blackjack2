@@ -54,6 +54,13 @@ class Display:
             
 
     def display_arrow(self):
+        #remove current arrow
+        self.stdscr.addstr(0 + 3, 0, '      ')
+        self.stdscr.addstr(7 + 3, 0, '      ')
+        self.stdscr.addstr(14 + 3, 0, '      ')
+        self.stdscr.addstr(21 + 3, 0, '      ')
+        self.stdscr.addstr(28 + 3, 0, '      ')
+        #create arrow
         self.stdscr.addstr(self.y_dict[self.game.current_hand.name] + 3, 0, '----->')
 
     def display_name(self, hand):
