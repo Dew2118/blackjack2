@@ -46,10 +46,10 @@ def test_decide():
     assert Game().decide(hand, other_hand) == 'Tie'
     hand.cards = [Card('A','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
-    assert Game().decide(hand, other_hand) == f'{hand.name} won'
+    assert Game().decide(hand, other_hand) == f'{hand.name} won w BJ!'
     hand.cards = [Card('2','S'), Card('10','S')]
     other_hand.cards = [Card('A','S'), Card('J','S')]
-    assert Game().decide(hand, other_hand) == f'{other_hand.name} won'
+    assert Game().decide(hand, other_hand) == f'{other_hand.name} won w BJ!'
     hand.cards = [Card('3','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
     assert Game().decide(hand, other_hand) == f'{hand.name} won'

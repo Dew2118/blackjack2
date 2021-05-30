@@ -10,6 +10,7 @@ class Display:
 
     def display(self, game):
         self.game = game
+        self.display_bet()
         self.display_arrow()
         self.display_busted()
         self.display_blackjack()
@@ -30,6 +31,9 @@ class Display:
                 self.stdscr.addstr(y + 1, x + 1, '  ')
                 self.stdscr.addstr(y + 5, x + 4, '   ')
         self.stdscr.refresh()
+
+    def display_bet(self):
+        self.stdscr.addstr(38, 0, f'Your current bankroll is: {self.game.bet.current_bankroll}')
 
     def display_score(self, hand, y):
         neg = 0
@@ -80,6 +84,11 @@ class Display:
         self.stdscr.refresh()
         return self.stdscr.getstr(35, len('Your decision is: ')).decode('utf-8')
 
+    def get_bet_amount(self):
+        self.stdscr.addstr(35, 0, 'Your betting amount is: ')
+        self.stdscr.refresh()
+        return self.stdscr.getstr(35, len('Your betting amount is: ')).decode('utf-8')
+
     def display_decide(self, hand_name, text, counter):
         self.stdscr.addstr(36, counter * 18, f'result for {hand_name}')
         self.stdscr.addstr(37, counter * 18, text)
@@ -90,6 +99,11 @@ class Display:
         self.stdscr.refresh()
         sleep(2)
         self.stdscr.addstr(34, 0, '             ')
+        self.stdscr.refresh()
+
+    def clear(self):
+        sleep(4)
+        self.stdscr.clear()
         self.stdscr.refresh()
 
 display = curses.wrapper(Display)

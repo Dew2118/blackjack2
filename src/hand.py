@@ -14,11 +14,12 @@
 
 class Hand:
     """Represent a hand of a player"""
-    def __init__(self, name) -> None:
+    def __init__(self, name, bet_amount = 0) -> None:
         # Keep cards in hand
         self.cards = []
         # Name of this hand
         self.name = name
+        self.bet_amount = bet_amount
 
     def draw(self, game, no_of_cards):
         """draw cards as many as specified in no_of_cards from shoe"""
@@ -78,8 +79,10 @@ class Hand:
             elif decision == 's': # stand
                 stop_drawing = True
             elif decision == 'd': # double the bet and draw 1 card
-            # TODO: need to add double the bet and make test to make sure that it's correct
+            # DONE: need to add double the bet and make test to make sure that it's correct
                 self.draw(game, 1)
+                game.bet.bet(self.bet_amount)
+                self.bet_amount *= 2
                 stop_drawing = True
             elif decision == 'sp': # split
                 self.split(game)
@@ -99,4 +102,6 @@ class Hand:
         new_hand.cards = [Second_card]
         self.cards = [First_card]
         game.hand_stack.append(new_hand)
+        game.bet.bet(self.bet_amount)
+        new_hand.bet_amount = self.bet_amount
         game.all_hand.append(new_hand)

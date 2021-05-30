@@ -15,7 +15,7 @@ class Deviation(Basic_strategy):
     def main(self, sum, dealer_up_card, ace = False, splittable = False):
         if splittable == True:
             return self.split(sum, dealer_up_card, ace)
-        elif ace  == True:
+        elif ace == True:
             return self.ace(sum, dealer_up_card)
         return self.norm(sum, dealer_up_card)
 
