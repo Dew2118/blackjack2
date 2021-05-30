@@ -41,6 +41,7 @@ def test_no_hand_left():
 def test_decide():
     hand = Hand('player')
     other_hand = Hand('dealer')
+    #check blackjack
     hand.cards = [Card('A','S'), Card('J','S')]
     other_hand.cards = [Card('A','S'), Card('10','S')]
     assert Game().decide(hand, other_hand) == 'Tie'
@@ -50,12 +51,21 @@ def test_decide():
     hand.cards = [Card('2','S'), Card('10','S')]
     other_hand.cards = [Card('A','S'), Card('J','S')]
     assert Game().decide(hand, other_hand) == f'{other_hand.name} won w BJ!'
+    #check busted
+    hand.cards = [Card('J','C'), Card('J','S'), Card('2','S')]
+    other_hand.cards = [Card('2','S'), Card('10','S')]
+    assert Game().decide(hand, other_hand) == f'{other_hand.name} won'
+    hand.cards = [Card('3','S'), Card('J','S')]
+    other_hand.cards = [Card('2','S'), Card('10','S'), Card('5','S'), Card('7','S')]
+    assert Game().decide(hand, other_hand) == f'{hand.name} won'
+    #check for more score
     hand.cards = [Card('3','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
     assert Game().decide(hand, other_hand) == f'{hand.name} won'
     hand.cards = [Card('2','S'), Card('10','S')]
     other_hand.cards = [Card('3','S'), Card('J','S')]
     assert Game().decide(hand, other_hand) == f'{other_hand.name} won'
+    #tie
     hand.cards = [Card('5','D'), Card('J','S')]
     other_hand.cards = [Card('5','S'), Card('10','S')]
     assert Game().decide(hand, other_hand) == 'Tie'
