@@ -1,4 +1,4 @@
-#TODO: Try using git branch to test whether we can remove class player
+#DONE: Try using git branch to test whether we can remove class player
 # But use only hand
 # So in hand class, we must keep player name
 # And also keep status whether this hand belongs to dealer or not
@@ -7,7 +7,7 @@
 # if it's the same player name, it means that this hand belongs to the same player
 # and we also keep track of player's name in game, so we can loop either by player or by hand.
 
-#TODO: May consider adding a method for returning only exposed cards.
+#DONE: May consider adding a method for returning only exposed cards.
 # So we can use it for any strategies.
 # Normally, all hands will return all cards in hands as exposed cards
 # except dealer that will have one card unexposed.
