@@ -22,6 +22,9 @@ class Game:
     def display(self):
         display.display(self)
 
+    def display_unknown_input(self):
+        display.display_unknown_input()
+
     def get_input(self):
         return display.get_input()
 

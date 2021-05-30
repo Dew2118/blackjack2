@@ -78,4 +78,11 @@ class Display:
         self.stdscr.addstr(37, counter * 18, text)
         self.stdscr.refresh()
 
+    def display_unknown_input(self):
+        self.stdscr.addstr(34, 0, 'invalid input')
+        self.stdscr.refresh()
+        sleep(2)
+        self.stdscr.addstr(34, 0, '             ')
+        self.stdscr.refresh()
+
 display = curses.wrapper(Display)

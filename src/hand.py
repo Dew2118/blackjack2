@@ -84,8 +84,8 @@ class Hand:
             elif decision == 'sp': # split
                 self.split(game)
             else:
-                # TODO: Display that it is unknown decision
-                pass
+                # DONE: Display that it is unknown decision
+                game.display_unknown_input()
 
     def is_splittable(self):
         return (len(self.cards) == 2) and (self.cards[0].value == self.cards[1].value)
