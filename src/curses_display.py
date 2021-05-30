@@ -10,15 +10,16 @@ class Display:
 
     def display(self, game):
         self.game = game
-        self.display_bet()
         self.display_arrow()
-        self.display_busted()
-        self.display_blackjack()
+        self.display_bankroll()
         self.stdscr.addstr(40, 0, f'The running count is {game.running_count} and the True count is {"%.2f" % round(game.running_count / len(game.shoe.cards), 2)}')
         for hand in self.game.all_hand:
             self.display_name(hand)
             y = self.y_dict[hand.name]
             x = 7
+            self.display_busted(hand)
+            self.display_blackjack(hand)
+            self.display_bet(hand, y)
             self.display_score(hand, y)
             for c in hand.cards:
                 value = c.value
@@ -32,14 +33,17 @@ class Display:
                 self.stdscr.addstr(y + 5, x + 4, '   ')
         self.stdscr.refresh()
 
-    def display_bet(self):
+    def display_bankroll(self):
         self.stdscr.addstr(38, 0, f'Your current bankroll is: {self.game.bet.current_bankroll}')
+
+    def display_bet(self, hand, y):
+        self.stdscr.addstr(y + 1, 0, str(hand.bet_amount))
 
     def display_score(self, hand, y):
         neg = 0
         if (hand.name == 'dealer' and self.game.current_hand.name != 'dealer'):
             neg = hand.cards[1].score
-        self.stdscr.addstr(y + 5, 0, str(hand.get_score() - neg))
+        self.stdscr.addstr(y + 6, 0, str(hand.get_score() - neg))
         self.stdscr.refresh()
 
     def display_card(self, x, y, symbol):
@@ -70,16 +74,17 @@ class Display:
     def display_name(self, hand):
         self.stdscr.addstr(self.y_dict[hand.name], 0, hand.name)
 
-    def display_busted(self):
-        if self.game.current_hand.is_busted() == True:
-            self.stdscr.addstr(self.y_dict[self.game.current_hand.name] + 2, 0, 'Busted')
+    def display_busted(self, hand):
+        if hand.is_busted() == True:
+            self.stdscr.addstr(self.y_dict[hand.name] + 2, 0, 'Busted')
 
-    def display_blackjack(self):
-        if self.game.current_hand.is_blackjack() == True:
-            self.stdscr.addstr(self.y_dict[self.game.current_hand.name] + 4, 0, 'Black')
-            self.stdscr.addstr(self.y_dict[self.game.current_hand.name] + 5, 0, 'jack!')
+    def display_blackjack(self, hand):
+        if hand.is_blackjack() == True:
+            self.stdscr.addstr(self.y_dict[hand.name] + 4, 0, 'Black')
+            self.stdscr.addstr(self.y_dict[hand.name] + 5, 0, 'jack!')
 
     def get_input(self):
+        self.stdscr.addstr(35, 0, '                            ')
         self.stdscr.addstr(35, 0, 'Your decision is: ')
         self.stdscr.refresh()
         return self.stdscr.getstr(35, len('Your decision is: ')).decode('utf-8')

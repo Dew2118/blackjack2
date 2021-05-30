@@ -28,10 +28,6 @@ class Basic_strategy:
             return 'h'
 
     def ace(self, sum, dealer_up_card):
-        if (sum - 11) > 9:
-            return self.norm(sum, dealer_up_card)
-        else:
-            sum -= 11
         if sum == 9:
             return 's'
         if sum == 8:

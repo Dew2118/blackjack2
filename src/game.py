@@ -67,6 +67,8 @@ class Game:
             while self.hand_left():
                 self.current_hand = self.next_hand()
                 self.current_hand.play(self)
+            display_object.display(self)
+            # decide the game
             for count, hand in enumerate(self.all_hand):
                 if hand.name != 'dealer':
                     result = self.decide(hand, self.all_hand[0])
