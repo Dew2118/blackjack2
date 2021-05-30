@@ -65,9 +65,113 @@ class Game
 ```
 และเราสามารถรัน pytest ด้วย command
 ```bash
-PYTHONPATH=. pytest
+pytest
 ```
-> เราต้องกำหนด PYTHONPATH ให้เป็น current directory เพื่อให้สามารถ import ได้
 
+> เราต้องกำหนด PYTHONPATH ให้เป็น parent directory (..)เพื่อให้สามารถ run code ได้
+
+```bash
+PYTHONPATH=.. python3 main.py
+```
 30 May 2021
 ลืม update Readme ตอนนี้ เขียน code เสร็จแล้ว ขณะนี้ ทำ code reveiw เพื่อทบทวนและเรียนรู้ code ที่เขียนไป
+Remove Player class because it is not needed. Game and Hand is good enough.
+
+current directory is:
+```
+blackjack2/
+├── Readme.md
+├── __init__.py
+├── main.py
+├── src
+│   ├── __init__.py
+│   ├── basic_strategy.py
+│   ├── bet.py
+│   ├── card.py
+│   ├── curses_display.py
+│   ├── deck.py
+│   ├── deviation.py
+│   ├── display.py
+│   ├── game.py
+│   ├── hand.py
+│   ├── shoe.py
+│   └── strategist.py
+└── test
+    ├── __init__.py
+    ├── test_basic_strategy.py
+    ├── test_bet.py
+    ├── test_card.py
+    ├── test_deck.py
+    ├── test_deviation.py
+    ├── test_game.py
+    ├── test_hand.py
+    ├── test_shoe.py
+    └── test_strategist.py
+```
+The current setup is
+```mermaid
+classDiagram
+    Deck <|-- Shoe
+    Card *-- Deck
+    Card *-- Hand
+    Strategist *-- Hand
+    Bet *-- Hand
+    Hand -- Curses_display
+    Deviation *-- Strategist
+    Basic_strategy <|-- Deviation
+    Hand *-- Game
+    Curses_display -- Game
+    Strategist -- Game
+    Bet *-- Game
+    class Card{
+        + value
+        + suit
+        + score      
+    }
+    class Deck{
+        + 52 Cards
+        + shuffle()
+        + deal
+    }
+    class Shoe{
+        + create > 1 \
+        deck
+    }
+    class Hand{
+        + deal
+        + running_count
+        + play
+        + split
+        + is_busted()
+        + is_blackjack()
+
+    }
+    class Strategist{
+        + get by human
+        + get by code
+    }
+    class Basic_strategy{
+        + basic strategy
+    }
+    class Deviation{
+        + w/ running count
+        + w/ deviate with true count
+    }
+    class Game{
+        + create hand
+        + call hand.play
+    }
+    class Curses_display{
+        + display everything
+        + get decision
+        + get \
+        current bet
+    }
+    class Bet{
+        + bankroll
+        + pull bet
+        + win pay \
+         double
+        + BJ pay 3/2
+    }
+```
