@@ -57,3 +57,18 @@ def test_is_splittable():
     assert hand.is_splittable() == True
     hand.cards = [Card('K','S'), Card('K','C'), Card('K','D')]
     assert hand.is_splittable() == False
+
+def test_split():
+    hand = Hand('name', bet_amount = 100)
+    hand.cards  = [Card('A','S')]
+    assert hand.split(Game()) == 'rt'
+
+    hand = Hand('name', bet_amount = 100)
+    hand.cards  = [Card('A','S'), Card('A','C')]
+    game = Game()
+    br = game.bet.current_bankroll
+    hand.split(game)
+    assert hand.cards == [Card('A','S')]
+    assert game.bet.current_bankroll == br - 100
+    assert game.hand_stack[-1] == game.all_hand[-1]
+    assert game.hand_stack[-1].bet_amount == 100

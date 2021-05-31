@@ -80,7 +80,7 @@ class Hand:
 
     def split(self, game):
         if self.is_splittable() is False:
-            return
+            return 'rt'
         First_card, Second_card = self.cards.copy()
         new_hand = Hand(f'split_{game.split_counter}')
         game.split_counter += 1
