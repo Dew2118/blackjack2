@@ -112,15 +112,14 @@ The current setup is
 ```mermaid
 classDiagram
     Deck <|-- Shoe
+    Shoe *-- Game
     Card *-- Deck
     Card *-- Hand
-    Strategist *-- Hand
     Bet *-- Hand
-    Hand -- Curses_display
     Deviation *-- Strategist
     Basic_strategy <|-- Deviation
     Hand *-- Game
-    Curses_display -- Game
+    Curses_display o--o Game
     Strategist -- Game
     Bet *-- Game
     class Card{
@@ -134,12 +133,14 @@ classDiagram
         + deal
     }
     class Shoe{
-        + create > 1 \
+        + create >= 1 \
         deck
     }
     class Hand{
         + deal
         + running_count
+        + true_count \
+        = running_count / deck_left
         + play
         + split
         + is_busted()
@@ -147,8 +148,11 @@ classDiagram
 
     }
     class Strategist{
-        + get by human
-        + get by code
+        + get by \
+         human
+        
+        + get by \
+         code
     }
     class Basic_strategy{
         + basic strategy
@@ -172,6 +176,7 @@ classDiagram
         + pull bet
         + win pay \
          double
-        + BJ pay 3/2
+        + BJ pay \
+         3/2
     }
 ```

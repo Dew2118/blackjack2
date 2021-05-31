@@ -70,11 +70,13 @@ class Deviation(Basic_strategy):
                 return 'h'
         if sum == 8 and dealer_up_card == 6:
             if self.true_count >= 2:
+                #test
                 return 'd'
             return 'h'
         return Basic_strategy().norm(sum, dealer_up_card)
 
     def ace(self, sum, dealer_up_card):
+        #test
         if (sum - 11) > 9:
             return self.norm(sum, dealer_up_card)
         else:
@@ -93,6 +95,7 @@ class Deviation(Basic_strategy):
                     return 's'
                 return 'd'
         if sum == 6 and dealer_up_card == 2:
+            #test
             if self.true_count >= 1:
                 return 'd'
             return 'h'
@@ -108,6 +111,7 @@ class Deviation(Basic_strategy):
                 if self.true_count >= 5:
                     return 'sp'
                 return 's'
+            # test
             if dealer_up_card == 6:
                 if self.true_count >= 4:
                     return 'sp'

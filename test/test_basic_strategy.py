@@ -32,26 +32,26 @@ def test_norm():
 def test_ace():
     basic_strategy = Basic_strategy()
     for up_card in [2,3,4,5,6,7,8,9,10,11]:
-        assert basic_strategy.ace(20, up_card) == 's'
+        assert basic_strategy.ace(9, up_card) == 's'
     for up_card in [2,3,4,5,7,8,9,10,11]:
-        assert basic_strategy.ace(19, up_card) == 's'
-    assert basic_strategy.ace(19, 6) == 'd'    
+        assert basic_strategy.ace(8, up_card) == 's'
+    assert basic_strategy.ace(8, 6) == 'd'    
     for up_card in [2,3,4,5,6]:
-        assert basic_strategy.ace(18, up_card) == 'd'
+        assert basic_strategy.ace(7, up_card) == 'd'
     for up_card in [7,8]:
-        assert basic_strategy.ace(18, up_card) == 's'
+        assert basic_strategy.ace(7, up_card) == 's'
     for up_card in [9,10,11]:
-        assert basic_strategy.ace(18, up_card) == 'h'
+        assert basic_strategy.ace(7, up_card) == 'h'
     for up_card in [2,7,8,9,10,11]:
-        assert basic_strategy.ace(17, up_card) == 'h'
+        assert basic_strategy.ace(6, up_card) == 'h'
     for up_card in [3,4,5,6]:
-        assert basic_strategy.ace(17, up_card) == 'd'
-    for sum in [15,16]:
+        assert basic_strategy.ace(6, up_card) == 'd'
+    for sum in [4,5]:
         for up_card in [2,3,7,8,9,10,11]:
             assert basic_strategy.ace(sum, up_card) == 'h'
         for up_card in [4,5,6]:
             assert basic_strategy.ace(sum, up_card) == 'd'
-    for sum in [13,14]:
+    for sum in [2,3]:
         for up_card in [2,3,4,7,8,9,10,11]:
             assert basic_strategy.ace(sum, up_card) == 'h'
         for up_card in [5,6]:

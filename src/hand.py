@@ -30,21 +30,6 @@ class Hand:
             c = game.shoe.deal()
             self.cards.append(c)
 
-    def update_running_count(self, game):
-        result = 0
-        drawn = game.shoe.drawn
-        for c in drawn:
-            if c.score <= 6:
-                result += 1
-            if c.score >= 10:
-                result += -1
-        if game.current_hand.name != 'dealer':
-            if game.all_hand[0].cards[1].score <= 6:
-                result -= 1
-            elif game.all_hand[0].cards[1].score >= 10:
-                result += 1
-        game.running_count = result
-
     def is_busted(self):
         return (self.get_score() > 21)
 
@@ -70,8 +55,8 @@ class Hand:
 
         stop_drawing = False
         while not stop_drawing and not self.is_busted():
+            game.update_running_count()
             # update display
-            self.update_running_count(game)
             game.display()
             decision = game.strategist.make_decision(game)
             if decision == 'h': # hit a card

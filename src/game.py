@@ -2,6 +2,7 @@ from blackjack2.src.shoe import Shoe
 from blackjack2.src.hand import Hand
 from blackjack2.src.strategist import Strategist
 from blackjack2.src.bet import Bet
+import time
 import sys
 if not "pytest" in sys.modules:
     from blackjack2.src.curses_display import display as display_object
@@ -42,14 +43,14 @@ class Game:
         dealers_hand = Hand('dealer')
         dealers_hand.draw(self, 2)
         self.add_hand(dealers_hand)
-        players_hand = Hand('player', self.bet.bet(int(self.get_bet_amount())))
+        if not "pytest" in sys.modules:
+            players_hand = Hand('player', self.bet.bet(int(self.get_bet_amount())))
+        else:
+            players_hand = Hand('player')
         #remove bet from bankroll
         players_hand.draw(self, 2)
         self.add_hand(players_hand)
         self.all_hand = self.hand_stack.copy()
-
-    def setup_hand(self, hand):
-        hand.draw(self.shoe)
 
     def add_hand(self, hand):
         self.hand_stack.append(hand)
@@ -59,6 +60,22 @@ class Game:
 
     def hand_left(self):
         return (len(self.hand_stack) > 0)
+
+    #test
+    def update_running_count(self):
+        result = 0
+        drawn = self.shoe.drawn
+        for c in drawn:
+            if c.score <= 6:
+                result += 1
+            if c.score >= 10:
+                result += -1
+        if self.current_hand.name != 'dealer':
+            if self.all_hand[0].cards[1].score <= 6:
+                result -= 1
+            elif self.all_hand[0].cards[1].score >= 10:
+                result += 1
+        self.running_count = result
 
     def play(self):
         self.setup_deck()

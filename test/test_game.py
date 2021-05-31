@@ -1,4 +1,5 @@
 from blackjack2.src.game import Game
+import blackjack2.src.game as _game
 from blackjack2.src import game
 from blackjack2.src.hand import Hand
 from blackjack2.src.card import Card
@@ -6,6 +7,25 @@ from blackjack2.src.card import Card
 game._called_from_test = True
 def test_game_init():
     assert Game() is not None
+
+#test_curses_display_class
+class Display_test:
+    def __init__(self):
+        self.test = False
+    
+    def display(self, p):
+        self.test = True
+
+    def display_unknown_input(self):
+        self.test = True
+
+    def get_input(self):
+        self.test = True
+
+    def get_bet_amount(self):
+        self.test = True
+
+
 
 def test_hand_stack():
     game = Game()
@@ -29,6 +49,61 @@ def test_next_hand():
     assert len(game.hand_stack) == 1
     assert game.next_hand() == hand
     assert len(game.hand_stack) == 0
+
+def test_setup_players():
+    game = Game()
+    game.setup_deck()
+    game.setup_players()
+    dealers_hand = game.all_hand[0]
+    players_hand = game.all_hand[1]
+    assert type(dealers_hand) == Hand
+    assert len(dealers_hand.cards) == 2
+    assert type(players_hand) == Hand
+    assert len(players_hand.cards) == 2
+
+def test_update_running_count():
+    game = Game()
+    game.setup_deck()
+    game.shoe.drawn = [Card('A','S')]
+    game.current_hand = Hand('player')
+    hand = Hand('test')
+    hand.cards = [Card('8','C'), Card('10','C')]
+    game.all_hand = [hand]
+    game.update_running_count()
+    assert game.running_count == 0
+    game = Game()
+    game.setup_deck()
+    game.shoe.drawn = [Card('3','S')]
+    game.current_hand = Hand('player')
+    hand = Hand('test')
+    hand.cards = [Card('10','C'), Card('3','C')]
+    game.all_hand = [hand]
+    game.update_running_count()
+    assert game.running_count == 0
+
+def test_display():
+    _game.display_object = Display_test()
+    assert _game.display_object.test == False
+    Game().display()
+    assert _game.display_object.test == True
+
+def test_display_unknown_input():
+    _game.display_object = Display_test()
+    assert _game.display_object.test == False
+    Game().display_unknown_input()
+    assert _game.display_object.test == True
+
+def test_get_input():
+    _game.display_object = Display_test()
+    assert _game.display_object.test == False
+    Game().get_input()
+    assert _game.display_object.test == True
+
+def test_get_bet_amount():
+    _game.display_object = Display_test()
+    assert _game.display_object.test == False
+    Game().get_bet_amount()
+    assert _game.display_object.test == True
 
 def test_no_hand_left():
     game = Game()
