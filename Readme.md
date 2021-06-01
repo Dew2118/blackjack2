@@ -68,10 +68,14 @@ class Game
 pytest
 ```
 
-> เราต้องกำหนด PYTHONPATH ให้เป็น parent directory (..)เพื่อให้สามารถ run code ได้
-
+> The way to run the code is run via main.py
+#### Linux, Macos
 ```bash
-PYTHONPATH=.. python3 main.py
+python3 main.py
+```
+#### Windows
+```bash
+python main.py
 ```
 30 May 2021
 ลืม update Readme ตอนนี้ เขียน code เสร็จแล้ว ขณะนี้ ทำ code reveiw เพื่อทบทวนและเรียนรู้ code ที่เขียนไป
