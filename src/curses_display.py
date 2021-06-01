@@ -1,5 +1,8 @@
-import curses
 from time import sleep
+import sys
+if not "pytest" in sys.modules:
+    import curses
+
 
 class Display:
     SUIT_CHR = {'S': '\u2660', 'H': '\u2665', 'D': '\u2666', 'C': '\u2663'}
@@ -44,7 +47,6 @@ class Display:
         if (hand.name == 'dealer' and self.game.current_hand.name != 'dealer'):
             neg = hand.cards[1].score
         self.stdscr.addstr(y + 6, 0, str(hand.get_score() - neg))
-        self.stdscr.refresh()
 
     def display_card(self, x, y, symbol):
         for a in range(6):
@@ -59,7 +61,6 @@ class Display:
         self.stdscr.addstr(y + 1, x + 1 + len(str(value)), self.SUIT_CHR[suit])
         self.stdscr.addstr(y + 5, x + 5 - len(str(value)), value)
         self.stdscr.addstr(y + 5, x + 5, self.SUIT_CHR[suit])
-            
 
     def display_arrow(self):
         #remove current arrow
@@ -99,7 +100,7 @@ class Display:
         if text[-1] != 'J':
             self.stdscr.addstr(37, counter * 18, f'{text} won!')
         else:
-            self.stdscr.addstr(37, counter * 18, f'{text} won w/ BJ!')
+            self.stdscr.addstr(37, counter * 18, f'{text[:-3]} won w/ BJ!')
         self.stdscr.refresh()
 
     def display_unknown_input(self):
@@ -114,4 +115,5 @@ class Display:
         self.stdscr.clear()
         self.stdscr.refresh()
 
-display = curses.wrapper(Display)
+if not "pytest" in sys.modules:
+    display = curses.wrapper(Display)
