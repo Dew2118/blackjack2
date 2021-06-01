@@ -1,5 +1,6 @@
 from blackjack2.src.deck import Deck
 from blackjack2.src.card import Card
+from blackjack2.src.custom_exception import DeckError
 import pytest
 
 def test_deck():
@@ -21,8 +22,8 @@ def test_deck_deal():
     # the last card must be King of clubs.
     assert deck.deal() == Card('K','C')
     assert len(deck.cards) == 0
-    # if trying to deal from an empty deck, RuntimeError will be raised
-    with pytest.raises(RuntimeError) as e_info:
+    # if trying to deal from an empty deck, DeckError will be raised
+    with pytest.raises(DeckError) as e_info:
         deck.deal()
 
 def test_shuffle():
