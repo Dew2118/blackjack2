@@ -27,8 +27,7 @@ class Hand:
             # DONE: make shoe keep track of drawn card
             # So if needed, we can go through the list of drawn card
             # and calculate running_count if we want
-            c = game.shoe.deal()
-            self.cards.append(c)
+            self.cards.append(game.shoe.deal(game))
 
     def is_busted(self):
         return (self.get_score() > 21)
