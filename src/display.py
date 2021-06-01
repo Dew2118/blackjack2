@@ -5,7 +5,7 @@ class Display:
     # but game object will be passed when call display method.
 
     def display(self, game):
-        for hand in game.all_hand:
+        for hand in game.all_hands:
             print(f'{hand.name} \n')
             if hand.name == 'dealer' and game.current_hand.name != 'dealer':
                 print(hand.cards[0].value, hand.cards[1].suit, '\n')

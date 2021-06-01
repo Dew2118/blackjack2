@@ -47,6 +47,10 @@ class Hand:
         # It is still correct.
         return (self.get_score() == 21) and (len(self.cards) == 2)
 
+    def isascii(self, s):
+        """Check if the characters in string s are in ASCII, U+0-U+7F."""
+        return len(s) == len(s.encode())
+
     # Papa's version to consider
     def play(self, game):
         # If this hand is already blackjack, do nothing
@@ -58,7 +62,12 @@ class Hand:
             game.update_running_count()
             # update display
             game.display()
-            decision = game.strategist.make_decision(game)
+            d = game.strategist.make_decision(game)
+            while not self.isascii(d):
+                game.display_unknown_input()
+                d = game.strategist.make_decision(game)
+                
+            decision = d
             if decision == 'h': # hit a card
                 self.draw(game, 1)
             elif decision == 's': # stand
@@ -89,4 +98,4 @@ class Hand:
         game.hand_stack.append(new_hand)
         game.bet.bet(self.bet_amount)
         new_hand.bet_amount = self.bet_amount
-        game.all_hand.append(new_hand)
+        game.all_hands.append(new_hand)

@@ -16,7 +16,7 @@ class Strategist:
             for card in game.current_hand.cards:
                 if card.score == 11:
                     ace = True
-            return Deviation(game).main(game.current_hand.get_score(), game.all_hand[0].cards[0].score, ace, game.current_hand.is_splittable())
+            return Deviation(game).main(game.current_hand.get_score(), game.all_hands[0].cards[0].score, ace, game.current_hand.is_splittable())
         else:
             return self.get_curses_decision()
 

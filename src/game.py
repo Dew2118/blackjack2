@@ -18,9 +18,11 @@ class Game:
         self.split_counter = 1
         self.bet = Bet(10000)
         self.current_hand = None
-        self.all_hand = self.hand_stack.copy()
+        self.all_hands = self.hand_stack.copy()
         self.strategist = Strategist(self)
         self.running_count = 0
+
+    
 
     def display(self):
         display_object.display(self)
@@ -50,7 +52,7 @@ class Game:
         #remove bet from bankroll
         players_hand.draw(self, 2)
         self.add_hand(players_hand)
-        self.all_hand = self.hand_stack.copy()
+        self.all_hands = self.hand_stack.copy()
 
     def add_hand(self, hand):
         self.hand_stack.append(hand)
@@ -71,9 +73,9 @@ class Game:
             if c.score >= 10:
                 result += -1
         if self.current_hand.name != 'dealer':
-            if self.all_hand[0].cards[1].score <= 6:
+            if self.all_hands[0].cards[1].score <= 6:
                 result -= 1
-            elif self.all_hand[0].cards[1].score >= 10:
+            elif self.all_hands[0].cards[1].score >= 10:
                 result += 1
         self.running_count = result
 
@@ -86,9 +88,9 @@ class Game:
                 self.current_hand.play(self)
             display_object.display(self)
             # decide the game
-            for count, hand in enumerate(self.all_hand):
+            for count, hand in enumerate(self.all_hands):
                 if hand.name != 'dealer':
-                    result = self.decide(hand, self.all_hand[0])
+                    result = self.decide(hand, self.all_hands[0])
                     if result == f'{hand.name} won':
                         self.bet.win(hand.bet_amount)
                     elif result == f'{hand.name} won w BJ!':

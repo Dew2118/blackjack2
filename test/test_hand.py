@@ -36,6 +36,10 @@ def test_is_busted():
     hand.cards = [Card('10','S'), Card('10','C'), Card('2','C')]
     assert hand.is_busted() == True
 
+def test_isascii():
+    assert Hand('name').isascii('ยกหดฟก') == False
+    assert Hand('name').isascii('s') == True
+
 def test_is_blackjack():
     hand = Hand('player')
     hand.cards = [Card('10','S'), Card('A','C')]
@@ -70,5 +74,5 @@ def test_split():
     hand.split(game)
     assert hand.cards == [Card('A','S')]
     assert game.bet.current_bankroll == br - 100
-    assert game.hand_stack[-1] == game.all_hand[-1]
+    assert game.hand_stack[-1] == game.all_hands[-1]
     assert game.hand_stack[-1].bet_amount == 100
