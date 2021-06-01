@@ -1,7 +1,12 @@
 from blackjack2.src.deck import Deck
 from blackjack2.src.card import Card
-from blackjack2.src.custom_exception import DeckError
 import pytest
+class Game:
+    def __init__(self) -> None:
+        self.test = False
+
+    def setup_deck(self):
+        self.test = True
 
 def test_deck():
     assert Deck() is not None
@@ -13,18 +18,20 @@ def test_deck_deal():
     # when dealing from a desk must return a card.
     # and the number of cards in the deck must be one less than earlier
     deck = Deck()
+    game = Game()
     # if no shuffle, the first card will be Ace of spade
-    assert deck.deal() == Card('A','S')
+    assert deck.deal(game) == Card('A','S')
     assert len(deck.cards) == 51
     # deal and throw away 50 cards
     for _ in range(50):
-        deck.deal()
+        deck.deal(game)
     # the last card must be King of clubs.
-    assert deck.deal() == Card('K','C')
+    assert deck.deal(game) == Card('K','C')
     assert len(deck.cards) == 0
+    deck.deal(game)
+    assert game.test == True
     # if trying to deal from an empty deck, DeckError will be raised
-    with pytest.raises(DeckError) as e_info:
-        deck.deal()
+    
 
 def test_shuffle():
     deck = Deck()
