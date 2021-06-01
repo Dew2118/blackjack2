@@ -1,7 +1,6 @@
 from time import sleep
 import sys
-if not "pytest" in sys.modules:
-    import curses
+import curses
 
 
 class Display:
