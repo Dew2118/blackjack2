@@ -122,24 +122,24 @@ def test_decide():
     assert Game().decide(hand, other_hand) == 'Tie'
     hand.cards = [Card('A','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
-    assert Game().decide(hand, other_hand) == f'{hand.name} won w BJ!'
+    assert Game().decide(hand, other_hand) == f'{hand.name} BJ'
     hand.cards = [Card('2','S'), Card('10','S')]
     other_hand.cards = [Card('A','S'), Card('J','S')]
-    assert Game().decide(hand, other_hand) == f'{other_hand.name} won w BJ!'
+    assert Game().decide(hand, other_hand) == f'{other_hand.name} BJ'
     #check busted
     hand.cards = [Card('J','C'), Card('J','S'), Card('2','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
-    assert Game().decide(hand, other_hand) == f'{other_hand.name} won'
+    assert Game().decide(hand, other_hand) == other_hand.name
     hand.cards = [Card('3','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S'), Card('5','S'), Card('7','S')]
-    assert Game().decide(hand, other_hand) == f'{hand.name} won'
+    assert Game().decide(hand, other_hand) == hand.name
     #check for more score
     hand.cards = [Card('3','S'), Card('J','S')]
     other_hand.cards = [Card('2','S'), Card('10','S')]
-    assert Game().decide(hand, other_hand) == f'{hand.name} won'
+    assert Game().decide(hand, other_hand) == hand.name
     hand.cards = [Card('2','S'), Card('10','S')]
     other_hand.cards = [Card('3','S'), Card('J','S')]
-    assert Game().decide(hand, other_hand) == f'{other_hand.name} won'
+    assert Game().decide(hand, other_hand) == other_hand.name
     #tie
     hand.cards = [Card('5','D'), Card('J','S')]
     other_hand.cards = [Card('5','S'), Card('10','S')]
