@@ -91,9 +91,9 @@ class Game:
             for count, hand in enumerate(self.all_hands):
                 if hand.name != 'dealer':
                     result = self.decide(hand, self.all_hands[0])
-                    if result == f'{hand.name} won':
+                    if result == {hand.name}:
                         self.bet.win(hand.bet_amount)
-                    elif result == f'{hand.name} won w BJ!':
+                    elif result == f'{hand.name} BJ':
                         self.bet.blackjack(hand.bet_amount)
                     display_object.display_decide(hand.name, result, count - 1)
             display_object.clear()
@@ -103,18 +103,18 @@ class Game:
         """return name of winner or tie if scores are equal"""
         # check blackjack cases
         if (hand.is_blackjack() is True) and (other_hand.is_blackjack() is False):
-            return f'{hand.name} won w BJ!'
+            return f'{hand.name} BJ'
         if (hand.is_blackjack() is False) and (other_hand.is_blackjack() is True):
-            return f'{other_hand.name} won w BJ!'
+            return f'{other_hand.name} BJ'
         # check busted cases
         if (hand.is_busted() is True) and (other_hand.is_busted() is False):
-            return f'{other_hand.name} won'
+            return other_hand.name
         if (hand.is_busted() is False) and (other_hand.is_busted() is True):
-            return f'{hand.name} won'
+            return hand.name
         # check score cases
         if hand.get_score() > other_hand.get_score():
-            return f'{hand.name} won'
+            return hand.name
         elif hand.get_score() < other_hand.get_score():
-            return f'{other_hand.name} won'
+            return other_hand.name
         else:
             return 'Tie'

@@ -96,7 +96,10 @@ class Display:
 
     def display_decide(self, hand_name, text, counter):
         self.stdscr.addstr(36, counter * 18, f'result for {hand_name}')
-        self.stdscr.addstr(37, counter * 18, text)
+        if text[-1] != 'J':
+            self.stdscr.addstr(37, counter * 18, f'{text} won!')
+        else:
+            self.stdscr.addstr(37, counter * 18, f'{text} won w/ BJ!')
         self.stdscr.refresh()
 
     def display_unknown_input(self):

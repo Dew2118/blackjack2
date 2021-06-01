@@ -1,5 +1,6 @@
 from blackjack2.src.card import Card
 import random
+from blackjack2.src.custom_exception import DeckError
 
 class Deck:
     def __init__(self) -> None:
@@ -9,9 +10,9 @@ class Deck:
         self.drawn = []
 
     def deal(self):
-        """return a Card. Raise RuntimeError if there is no card left."""
+        """return a Card. Raise Deckerror if there is no card left."""
         if self.cards == []:
-            raise RuntimeError
+            raise DeckError('Run out of deck, consider starting a new game')
         result = self.cards.pop(0)
         self.drawn.append(result)
         return result

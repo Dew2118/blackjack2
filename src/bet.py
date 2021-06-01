@@ -1,9 +1,15 @@
+from blackjack2.src.custom_exception import BetError
+
 class Bet:
     def __init__(self, starting_bankroll) -> None:
         self.current_bankroll = starting_bankroll
     
     def bet(self, amount):
+        if amount > self.current_bankroll:
+            raise BetError('Too much bet')
         self.current_bankroll -= amount
+        if self.current_bankroll < 0:
+            raise BetError('Bankrupted, consider starting a new game')
         return amount
 
     def win(self, amount):
