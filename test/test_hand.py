@@ -70,5 +70,5 @@ def test_split():
     hand.split(game)
     assert hand.cards == [Card('A','S')]
     assert game.bet.current_bankroll == br - 100
-    assert game.hand_stack[-1] == game.all_hand[-1]
+    assert game.hand_stack[-1] == game.all_hands[-1]
     assert game.hand_stack[-1].bet_amount == 100

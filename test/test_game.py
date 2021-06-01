@@ -54,8 +54,8 @@ def test_setup_players():
     game = Game()
     game.setup_deck()
     game.setup_players()
-    dealers_hand = game.all_hand[0]
-    players_hand = game.all_hand[1]
+    dealers_hand = game.all_hands[0]
+    players_hand = game.all_hands[1]
     assert type(dealers_hand) == Hand
     assert len(dealers_hand.cards) == 2
     assert type(players_hand) == Hand
@@ -68,7 +68,7 @@ def test_update_running_count():
     game.current_hand = Hand('player')
     hand = Hand('test')
     hand.cards = [Card('8','C'), Card('10','C')]
-    game.all_hand = [hand]
+    game.all_hands = [hand]
     game.update_running_count()
     assert game.running_count == 0
     game = Game()
@@ -77,7 +77,7 @@ def test_update_running_count():
     game.current_hand = Hand('player')
     hand = Hand('test')
     hand.cards = [Card('10','C'), Card('3','C')]
-    game.all_hand = [hand]
+    game.all_hands = [hand]
     game.update_running_count()
     assert game.running_count == 0
 

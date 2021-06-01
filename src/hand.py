@@ -89,4 +89,4 @@ class Hand:
         game.hand_stack.append(new_hand)
         game.bet.bet(self.bet_amount)
         new_hand.bet_amount = self.bet_amount
-        game.all_hand.append(new_hand)
+        game.all_hands.append(new_hand)
