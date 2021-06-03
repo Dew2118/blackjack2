@@ -153,6 +153,12 @@ def test_display_decide():
     assert stdscr.action[0] == Addstr(36, 18, 'result for player')
     assert stdscr.action[1] == Addstr(37,18, 'player won w/ BJ!')
 
+    stdscr = Stdscr()
+    display = Display(stdscr)
+    display.display_decide('player', 'tie', 1)
+    assert stdscr.action[0] == Addstr(36, 18, 'result for player')
+    assert stdscr.action[1] == Addstr(37,18, 'tie')
+
 def test_display_unknown_input():
     stdscr = Stdscr()
     display = Display(stdscr)
