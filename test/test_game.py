@@ -68,7 +68,7 @@ def test_update_running_count():
     game.current_hand = Hand('player')
     hand = Hand('test')
     hand.cards = [Card('8','C'), Card('10','C')]
-    game.all_hands = [hand]
+    game.dealers_hand = hand
     game.update_running_count()
     assert game.running_count == 0
     game = Game()
@@ -77,7 +77,7 @@ def test_update_running_count():
     game.current_hand = Hand('player')
     hand = Hand('test')
     hand.cards = [Card('10','C'), Card('3','C')]
-    game.all_hands = [hand]
+    game.dealers_hand = hand
     game.update_running_count()
     assert game.running_count == 0
 
