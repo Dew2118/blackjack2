@@ -10,17 +10,19 @@ else:
     display_object = None
 # Constant values
 NO_OF_DECKS = 1
+BANKROLL_AMOUNT = 10000
 
 class Game:
     def __init__(self):
         self.shoe = None
         self.hand_stack = []
         self.split_counter = 1
-        self.bet = Bet(10000)
+        self.bet = Bet(BANKROLL_AMOUNT)
         self.current_hand = None
         self.all_hands = self.hand_stack.copy()
         self.strategist = Strategist(self)
         self.running_count = 0
+        self.dealers_hand = None
 
     def display(self):
         display_object.display(self)
@@ -40,9 +42,9 @@ class Game:
 
     def setup_players(self):
         #create dealer
-        dealers_hand = Hand('dealer')
-        dealers_hand.draw(self, 2)
-        self.add_hand(dealers_hand)
+        self.dealers_hand = Hand('dealer')
+        self.dealers_hand.draw(self, 2)
+        self.add_hand(self.dealers_hand)
         if not "pytest" in sys.modules:
             players_hand = Hand('player', self.bet.bet(int(self.get_bet_amount())))
         else:
@@ -71,9 +73,9 @@ class Game:
             if c.score >= 10:
                 result += -1
         if self.current_hand.name != 'dealer':
-            if self.all_hands[0].cards[1].score <= 6:
+            if self.dealers_hand.cards[1].score <= 6:
                 result -= 1
-            elif self.all_hands[0].cards[1].score >= 10:
+            elif self.dealers_hand.cards[1].score >= 10:
                 result += 1
         self.running_count = result
 
@@ -88,7 +90,7 @@ class Game:
             # decide the game
             for count, hand in enumerate(self.all_hands):
                 if hand.name != 'dealer':
-                    result = self.decide(hand, self.all_hands[0])
+                    result = self.decide(hand, self.dealers_hand)
                     if result == {hand.name}:
                         self.bet.win(hand.bet_amount)
                     elif result == f'{hand.name} BJ':
