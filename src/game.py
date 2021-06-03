@@ -22,8 +22,6 @@ class Game:
         self.strategist = Strategist(self)
         self.running_count = 0
 
-    
-
     def display(self):
         display_object.display(self)
 

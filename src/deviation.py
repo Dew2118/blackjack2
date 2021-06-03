@@ -99,7 +99,7 @@ class Deviation(Basic_strategy):
             if self.true_count >= 1:
                 return 'd'
             return 'h'
-        return Basic_strategy().ace(sum, dealer_up_card)
+        return Basic_strategy().ace(sum, dealer_up_card, self)
     
     def split(self, sum, dealer_up_card, ace = False):
         if sum == 20:

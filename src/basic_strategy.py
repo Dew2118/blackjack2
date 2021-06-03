@@ -27,7 +27,7 @@ class Basic_strategy:
         if sum in [2,3,4,5,6,7,8]:
             return 'h'
 
-    def ace(self, sum, dealer_up_card):
+    def ace(self, sum, dealer_up_card, deviation = None):
         if sum == 9:
             return 's'
         if sum == 8:
@@ -57,6 +57,8 @@ class Basic_strategy:
                 return 'h'
             if dealer_up_card in [5,6]:
                 return 'd'
+        return deviation.norm(sum + 11, dealer_up_card)
+        
 
     def split(self, sum, dealer_up_card, ace = False):
         if sum == 16 or ace == True:
