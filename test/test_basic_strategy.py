@@ -1,4 +1,5 @@
 from blackjack2.src.basic_strategy import Basic_strategy
+from blackjack2.src.deviation import Deviation
 
 # basic strtegy test
 def test_norm():
@@ -56,6 +57,7 @@ def test_ace():
             assert basic_strategy.ace(sum, up_card) == 'h'
         for up_card in [5,6]:
             assert basic_strategy.ace(sum, up_card) == 'd'
+    assert Basic_strategy().ace(16,9, Deviation(running_count = 1, true_count = 4)) == 's'
 
 def test_split():
     basic_strategy = Basic_strategy()
