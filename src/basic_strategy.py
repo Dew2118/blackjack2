@@ -58,7 +58,6 @@ class Basic_strategy:
             if dealer_up_card in [5,6]:
                 return 'd'
         return deviation.norm(sum + 11, dealer_up_card)
-        
 
     def split(self, sum, dealer_up_card, ace = False):
         if sum == 16 or ace == True:
