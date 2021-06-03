@@ -1,7 +1,7 @@
 from time import sleep
 import sys
 import curses
-
+import sys
 
 class Display:
     SUIT_CHR = {'S': '\u2660', 'H': '\u2665', 'D': '\u2666', 'C': '\u2663'}
@@ -92,7 +92,10 @@ class Display:
     def get_bet_amount(self):
         self.stdscr.addstr(35, 0, 'Your betting amount is: ')
         self.stdscr.refresh()
-        return self.stdscr.getstr(35, len('Your betting amount is: ')).decode('utf-8')
+        a = ''
+        while not a.isnumeric():
+            a = self.stdscr.getstr(35, len('Your betting amount is: ')).decode('utf-8')
+        return a
 
     def display_decide(self, hand_name, text, counter):
         self.stdscr.addstr(36, counter * 18, f'result for {hand_name}')
@@ -107,12 +110,14 @@ class Display:
     def display_unknown_input(self):
         self.stdscr.addstr(34, 0, 'invalid input')
         self.stdscr.refresh()
-        sleep(2)
+        if not "pytest" in sys.modules:
+            sleep(2)
         self.stdscr.addstr(34, 0, '             ')
         self.stdscr.refresh()
 
     def clear(self):
-        sleep(4)
+        if not "pytest" in sys.modules:
+            sleep(4)
         self.stdscr.clear()
         self.stdscr.refresh()
 
