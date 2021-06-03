@@ -50,9 +50,20 @@ def test_next_hand():
     assert game.next_hand() == hand
     assert len(game.hand_stack) == 0
 
+#mocks
+class Bet:
+    def bet(self, amount):
+        return amount
+
+class Display:
+    def get_bet_amount(self):
+        return 100 
+
 def test_setup_players():
+    _game.display_object = Display()
     game = Game()
     game.setup_deck()
+    game.bet = Bet()
     game.setup_players()
     dealers_hand = game.all_hands[0]
     players_hand = game.all_hands[1]

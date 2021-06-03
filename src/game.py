@@ -2,7 +2,6 @@ from blackjack2.src.shoe import Shoe
 from blackjack2.src.hand import Hand
 from blackjack2.src.strategist import Strategist
 from blackjack2.src.bet import Bet
-import time
 import sys
 if not "pytest" in sys.modules:
     from blackjack2.src.curses_display import display as display_object
@@ -45,11 +44,7 @@ class Game:
         self.dealers_hand = Hand('dealer')
         self.dealers_hand.draw(self, 2)
         self.add_hand(self.dealers_hand)
-        if not "pytest" in sys.modules:
-            players_hand = Hand('player', self.bet.bet(int(self.get_bet_amount())))
-        else:
-            players_hand = Hand('player')
-        #remove bet from bankroll
+        players_hand = Hand('player', self.bet.bet(int(self.get_bet_amount())))
         players_hand.draw(self, 2)
         self.add_hand(players_hand)
         self.all_hands = self.hand_stack.copy()
