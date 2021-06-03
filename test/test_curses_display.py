@@ -29,7 +29,7 @@ class Stdscr:
 
     def getstr(self, y, x):
         self.action.append(Getstr(y,x))
-        return b''
+        return b'5'
 
 def test_get_input():
     stdscr = Stdscr()
