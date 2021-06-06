@@ -81,6 +81,7 @@ class Game:
             while self.hand_left():
                 self.current_hand = self.next_hand()
                 self.current_hand.play(self)
+            self.split_counter = 1
             display_object.display(self)
             # decide the game
             for count, hand in enumerate(self.all_hands):
