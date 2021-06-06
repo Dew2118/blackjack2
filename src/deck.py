@@ -9,7 +9,7 @@ class Deck:
         self.cards = [Card(v,s) for v in value for s in suit]
         self.drawn = []
 
-    def deal(self, game):
+    def deal(self):
         """return a Card. Raise Deckerror if there is no card left."""
         if len(self.cards) - 1 < 0:
             raise DeckError('Run out of deck, consider starting a new game')

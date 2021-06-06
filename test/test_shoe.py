@@ -14,5 +14,5 @@ def test_shoe_deal():
     shoe = Shoe(2)
     no_of_cards = len(shoe.cards)
     # if no shuffle, the first card will be Ace of spade
-    assert shoe.deal('game') == Card('A','S')
+    assert shoe.deal() == Card('A','S')
     assert len(shoe.cards) == no_of_cards-1

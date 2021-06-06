@@ -1,6 +1,7 @@
 from src.deck import Deck
 from src.card import Card
 import pytest
+from src.custom_exception import DeckError
 class Game:
     def __init__(self) -> None:
         self.test = False
@@ -18,18 +19,18 @@ def test_deck_deal():
     # when dealing from a desk must return a card.
     # and the number of cards in the deck must be one less than earlier
     deck = Deck()
-    game = Game()
     # if no shuffle, the first card will be Ace of spade
-    assert deck.deal(game) == Card('A','S')
+    assert deck.deal() == Card('A','S')
     assert len(deck.cards) == 51
     # deal and throw away 50 cards
     for _ in range(50):
-        deck.deal(game)
+        deck.deal()
     # the last card must be King of clubs.
-    assert deck.deal(game) == Card('K','C')
+    assert deck.deal() == Card('K','C')
     assert len(deck.cards) == 0
-    deck.deal(game)
-    assert game.test == True
+    with pytest.raises(DeckError) as e_info:
+        deck.deal()
+   
     # if trying to deal from an empty deck, DeckError will be raised
     
 

@@ -139,7 +139,8 @@ class Display:
                 self.stdscr.refresh()
             if action == 'clear':
                 self.stdscr.clear()
-        self.action = []
+        if not "pytest" in sys.modules:
+            self.action = []
 
 if not "pytest" in sys.modules:
     display = curses.wrapper(Display)

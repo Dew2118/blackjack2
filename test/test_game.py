@@ -25,6 +25,9 @@ class Display_test:
     def get_bet_amount(self):
         self.test = True
 
+    def execute(self):
+        pass
+
 
 
 def test_hand_stack():
