@@ -25,9 +25,11 @@ class Game:
 
     def display(self):
         display_object.display(self)
+        display_object.execute()
 
     def display_unknown_input(self):
         display_object.display_unknown_input()
+        display_object.execute()
 
     def get_input(self):
         return display_object.get_input()
@@ -83,6 +85,7 @@ class Game:
                 self.current_hand.play(self)
             self.split_counter = 1
             display_object.display(self)
+            display_object.execute()
             # decide the game
             for count, hand in enumerate(self.all_hands):
                 if hand.name != 'dealer':
@@ -92,7 +95,9 @@ class Game:
                     elif result == f'{hand.name} BJ':
                         self.bet.blackjack(hand.bet_amount)
                     display_object.display_decide(hand.name, result, count - 1)
+                    display_object.execute()
             display_object.clear()
+            display_object.execute()
 
     
     def decide(self, hand, other_hand):
