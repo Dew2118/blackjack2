@@ -1,7 +1,6 @@
 from time import sleep
 import sys
 import curses
-import sys
 
 class Display:
     SUIT_CHR = {'S': '\u2660', 'H': '\u2665', 'D': '\u2666', 'C': '\u2663'}

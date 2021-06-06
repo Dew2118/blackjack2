@@ -1,4 +1,4 @@
-from blackjack2.src.deviation import Deviation
+from src.deviation import Deviation
 
 def test_deviation_init():
     assert Deviation(running_count = 0, true_count = 0) is not None

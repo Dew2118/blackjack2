@@ -1,5 +1,5 @@
-from blackjack2.src.basic_strategy import Basic_strategy
-from blackjack2.src.deviation import Deviation
+from src.basic_strategy import Basic_strategy
+from src.deviation import Deviation
 
 # basic strtegy test
 def test_norm():

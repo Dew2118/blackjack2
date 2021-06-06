@@ -1,4 +1,4 @@
-from blackjack2.src.deck import Deck
+from src.deck import Deck
 
 class Shoe(Deck):
     def __init__(self, number_of_decks) -> None:

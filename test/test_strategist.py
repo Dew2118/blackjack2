@@ -1,6 +1,6 @@
-from blackjack2.src.strategist import Strategist
-from blackjack2.src.hand import Hand
-from blackjack2.src.card import Card
+from src.strategist import Strategist
+from src.hand import Hand
+from src.card import Card
 
 #test class
 class Game:

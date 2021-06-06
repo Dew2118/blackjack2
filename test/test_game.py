@@ -1,8 +1,8 @@
-from blackjack2.src.game import Game
-import blackjack2.src.game as _game
-from blackjack2.src import game
-from blackjack2.src.hand import Hand
-from blackjack2.src.card import Card
+from src.game import Game
+import src.game as _game
+from src import game
+from src.hand import Hand
+from src.card import Card
 
 game._called_from_test = True
 def test_game_init():

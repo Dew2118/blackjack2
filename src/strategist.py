@@ -1,4 +1,4 @@
-from blackjack2.src.deviation import Deviation
+from src.deviation import Deviation
 
 class Strategist:
     def __init__(self, game) -> None:

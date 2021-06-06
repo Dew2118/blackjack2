@@ -1,5 +1,5 @@
-from blackjack2.src.deck import Deck
-from blackjack2.src.card import Card
+from src.deck import Deck
+from src.card import Card
 import pytest
 class Game:
     def __init__(self) -> None:

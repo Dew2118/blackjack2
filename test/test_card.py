@@ -1,4 +1,4 @@
-from blackjack2.src.card import Card
+from src.card import Card
 
 def test_init_card():
     card = Card('A','S')

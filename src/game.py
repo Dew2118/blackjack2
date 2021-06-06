@@ -1,10 +1,10 @@
-from blackjack2.src.shoe import Shoe
-from blackjack2.src.hand import Hand
-from blackjack2.src.strategist import Strategist
-from blackjack2.src.bet import Bet
+from src.shoe import Shoe
+from src.hand import Hand
+from src.strategist import Strategist
+from src.bet import Bet
 import sys
 if not "pytest" in sys.modules:
-    from blackjack2.src.curses_display import display as display_object
+    from src.curses_display import display as display_object
 else:
     display_object = None
 # Constant values

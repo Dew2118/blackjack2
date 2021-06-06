@@ -1,7 +1,7 @@
-from blackjack2.src.curses_display import Display
-from blackjack2.src.game import Game
-from blackjack2.src.hand import Hand
-from blackjack2.src.card import Card
+from src.curses_display import Display
+from src.game import Game
+from src.hand import Hand
+from src.card import Card
 from dataclasses import dataclass
 
 @dataclass

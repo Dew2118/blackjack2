@@ -1,4 +1,4 @@
-from blackjack2.src.custom_exception import BetError
+from src.custom_exception import BetError
 
 class Bet:
     def __init__(self, starting_bankroll) -> None:

@@ -1,5 +1,5 @@
-from blackjack2.src.shoe import Shoe
-from blackjack2.src.card import Card
+from src.shoe import Shoe
+from src.card import Card
 
 def test_parameter():
     assert Shoe(4) is not None

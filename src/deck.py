@@ -1,6 +1,6 @@
-from blackjack2.src.card import Card
+from src.card import Card
 import random
-from blackjack2.src.custom_exception import DeckError
+from src.custom_exception import DeckError
 
 class Deck:
     def __init__(self) -> None:

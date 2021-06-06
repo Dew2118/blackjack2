@@ -1,4 +1,4 @@
-from blackjack2.src.basic_strategy import Basic_strategy
+from src.basic_strategy import Basic_strategy
 
 class Deviation(Basic_strategy):
     # parameter running_count and true_count are for testing purposes

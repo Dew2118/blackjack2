@@ -1,6 +1,6 @@
-from blackjack2.src.bet import Bet
+from src.bet import Bet
 import pytest
-from blackjack2.src.custom_exception import BetError
+from src.custom_exception import BetError
 
 def test_bet_init():
     assert Bet(10000) is not None

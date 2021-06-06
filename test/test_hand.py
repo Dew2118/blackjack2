@@ -1,6 +1,6 @@
-from blackjack2.src.hand import Hand
-from blackjack2.src.game import Game
-from blackjack2.src.card import Card
+from src.hand import Hand
+from src.game import Game
+from src.card import Card
 
 def test_hand_init():
     assert Hand is not None
